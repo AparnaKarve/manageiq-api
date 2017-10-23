@@ -53,6 +53,5 @@ module Api
         filter_resource(resource_action, type, klass)
       end
     end
-
   end
 end

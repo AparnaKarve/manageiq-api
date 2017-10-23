@@ -19,12 +19,12 @@ RSpec.describe 'CustomButtons API' do
       get(api_custom_buttons_url)
 
       expected = {
-          'count'     => 1,
-          'subcount'  => 1,
-          'name'      => 'custom_buttons',
-          'resources' => [
-            hash_including('href' => cb_href)
-          ]
+        'count'     => 1,
+        'subcount'  => 1,
+        'name'      => 'custom_buttons',
+        'resources' => [
+          hash_including('href' => cb_href)
+        ]
       }
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(expected)
@@ -62,11 +62,10 @@ RSpec.describe 'CustomButtons API' do
         'name'             => 'Generic Object Custom Button',
         'description'      => 'Generic Object Custom Button description',
         'applies_to_class' => 'GenericObjectDefinition',
-        # 'applies_to_id'    =>  object_def.id,
         'options'          => {
-            'button_icon'  => 'ff ff-view-expanded',
-            'button_color' => '#4727ff',
-            'display'      => true,
+          'button_icon'  => 'ff ff-view-expanded',
+          'button_color' => '#4727ff',
+          'display'      => true,
         },
       }
       post(api_custom_buttons_url, :params => cb_rec)
@@ -79,17 +78,17 @@ RSpec.describe 'CustomButtons API' do
       api_basic_authorize collection_action_identifier(:custom_buttons, :edit)
 
       request = {
-          'action'    => 'edit',
-          'resources' => [
-              { 'id' => cb.id.to_s, 'name' => 'updated 1' },
-          ]
+        'action'    => 'edit',
+        'resources' => [
+          { 'id' => cb.id.to_s, 'name' => 'updated 1' },
+        ]
       }
       post(api_custom_buttons_url, :params => request)
 
       expected = {
-          'results' => a_collection_including(
-              a_hash_including('id' => cb.id.to_s, 'name' => 'updated 1'),
-          )
+        'results' => a_collection_including(
+          a_hash_including('id' => cb.id.to_s, 'name' => 'updated 1'),
+        )
       }
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(expected)
@@ -123,17 +122,17 @@ RSpec.describe 'CustomButtons API' do
       api_basic_authorize collection_action_identifier(:custom_buttons, :delete)
 
       request = {
-          'action'    => 'delete',
-          'resources' => [
-              { 'id' => cb.id.to_s}
-          ]
+        'action'    => 'delete',
+        'resources' => [
+          { 'id' => cb.id.to_s}
+        ]
       }
       post(api_custom_buttons_url, :params => request)
 
       expected = {
-          'results' => a_collection_including(
-              a_hash_including('success' => true, 'message' => "custom_buttons id: #{cb.id} deleting")
-          )
+        'results' => a_collection_including(
+            a_hash_including('success' => true, 'message' => "custom_buttons id: #{cb.id} deleting")
+        )
       }
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(expected)
@@ -155,14 +154,14 @@ RSpec.describe 'CustomButtons API' do
       api_basic_authorize action_identifier(:custom_buttons, :edit)
 
       request = {
-          'name'        => 'Generic Object Custom Button Updated',
-          'description' => 'Generic Object Custom Button Description Updated',
+        'name'        => 'Generic Object Custom Button Updated',
+        'description' => 'Generic Object Custom Button Description Updated',
       }
       put(api_custom_button_url(nil, cb), :params => request)
 
       expected = {
-          'name'        => 'Generic Object Custom Button Updated',
-          'description' => 'Generic Object Custom Button Description Updated',
+        'name'        => 'Generic Object Custom Button Updated',
+        'description' => 'Generic Object Custom Button Description Updated',
       }
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(expected)
@@ -174,22 +173,22 @@ RSpec.describe 'CustomButtons API' do
       api_basic_authorize action_identifier(:custom_buttons, :edit)
 
       request = [
-          {
-              'action' => 'edit',
-              'path'   => 'name',
-              'value'  => 'Generic Object Custom Button Updated',
-          },
-          {
-              'action' => 'edit',
-              'path'   => 'description',
-              'value'  => 'Generic Object Custom Button Description Updated',
-          }
+        {
+          'action' => 'edit',
+          'path'   => 'name',
+          'value'  => 'Generic Object Custom Button Updated',
+        },
+        {
+          'action' => 'edit',
+          'path'   => 'description',
+          'value'  => 'Generic Object Custom Button Description Updated',
+        }
       ]
       patch(api_custom_button_url(nil, cb), :params => request)
 
       expected = {
-          'name'        => 'Generic Object Custom Button Updated',
-          'description' => 'Generic Object Custom Button Description Updated',
+        'name'        => 'Generic Object Custom Button Updated',
+        'description' => 'Generic Object Custom Button Description Updated',
       }
       expect(response).to have_http_status(:ok)
       expect(response.parsed_body).to include(expected)
