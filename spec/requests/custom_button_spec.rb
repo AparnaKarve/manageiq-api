@@ -199,20 +199,6 @@ RSpec.describe 'CustomButtons API' do
   describe 'OPTIONS /api/custom_buttons' do
     it 'returns allowed association types and data types' do
       options(api_custom_buttons_url)
-      # user = FactoryGirl.create(:user_with_group, :userid => "admin")
-      @user = FactoryGirl.create(:user_with_group, 'name' => 'Fred')
-      model_data_dir = Rails.root.join("spec/models/miq_ae_class/data")
-      EvmSpecHelper.import_yaml_model(File.join(model_data_dir, 'domain1'), "DOMAIN1")
-      EvmSpecHelper.import_yaml_model(File.join(model_data_dir, 'domain2'), "DOMAIN2")
-      EvmSpecHelper.import_yaml_model(File.join(model_data_dir, 'domain3'), "DOMAIN3")
-      # set_priority('domain1', 10)
-      # set_priority('domain2', 20)
-      # set_priority('domain3', 50)
-      @inst4_list =  %w(/DOMAIN3/SYSTEM/PROCESS/inst4  /DOMAIN1/SYSTEM/PROCESS/inst4)
-      @sorted_inst_list =  ['/DOMAIN3/SYSTEM/PROCESS/inst1', '/DOMAIN3/SYSTEM/PROCESS/inst2',
-                            '/DOMAIN3/SYSTEM/PROCESS/inst32', '/DOMAIN3/SYSTEM/PROCESS/inst4',
-                            '/DOMAIN2/SYSTEM/PROCESS/inst31', '/DOMAIN2/SYSTEM/PROCESS/inst41',
-                            '/DOMAIN1/SYSTEM/PROCESS/inst3']
 
       expected_data = {'custom_button_types'               => CustomButton::TYPES,
                        'service_dialogs'                   => Dialog.all.pluck(:id, :label).sort,
